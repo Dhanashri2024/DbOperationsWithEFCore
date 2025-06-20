@@ -1,4 +1,7 @@
 
+using DBOperationsWithEFCoreApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace DBOperationsWithEFCoreApp
 {
     public class Program
@@ -7,6 +10,9 @@ namespace DBOperationsWithEFCoreApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<AppDbContext>(Options =>
+            Options.UseSqlServer(builder.Configuration.GetConnectionString("AppDb"))
+            );
             // Add services to the container.
 
             builder.Services.AddControllers();
